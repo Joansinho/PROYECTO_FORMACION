@@ -1,5 +1,5 @@
 .footer {
-    height: 500px; /* Altura del footer */
+    height: 65vh; /* Altura del footer */
     background-color: #f8f9fa; /* Color de fondo */
     padding: 40px 60px; /* Espacio interno */
     display: flex;

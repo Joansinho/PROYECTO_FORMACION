@@ -1,18 +1,17 @@
 /* AllProducts.css */
 .allproducts-page {
     display: flex;
-    padding: 20px;
-    background-color: #f4f4f4;
+    background-color: #fff;
     flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas más pequeñas */
 }
 
 .allproducts-filter__container {
     width: 250px; /* Ancho para la barra lateral */
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    height: 100vh;
+    border-right: 1px solid #14A2C915;
     padding: 15px;
-    background-color: #f9f9f9;
-    margin-right: 20px; /* Espacio entre la barra lateral y la sección de productos */
+    background-color: #f5f6fa;
+    margin-right: 20px; 
     flex-shrink: 0; /* Evita que la barra lateral se encoja */
 }
 
@@ -25,6 +24,10 @@
 .allproducts-price__filter,
 .allproducts-price__manual-filter {
     margin-bottom: 15px;
+}
+
+.allproducts-category__filter {
+    margin-top: 25px;
 }
 
 .allproducts-category__item,
@@ -89,6 +92,49 @@
     gap: 15px; /* Espacio entre productos */
 }
 
+.allproducts-category__item input[type="checkbox"],
+.allproducts-price__item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px; /* Tamaño reducido para el círculo */
+    height: 16px; /* Tamaño reducido para el círculo */
+    border-radius: 50%;
+    border: 2px solid #1b1b1b; /* Color del borde del círculo */
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    margin-right: 8px;
+    background: #fff; /* Color de fondo del círculo */
+}
+
+.allproducts-category__item input[type="checkbox"]:checked::before,
+.allproducts-price__item input[type="checkbox"]:checked::before {
+    content: '';
+    width: 9px; /* Tamaño del relleno interior */
+    height: 9px; /* Tamaño del relleno interior */
+    background-color: #000000; /* Color del relleno cuando el checkbox está seleccionado */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.allproducts-category__item label,
+.allproducts-price__item label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.allproducts-category__item span,
+.allproducts-price__item span {
+    margin-left: 8px;
+    color: #333; /* Color del texto */
+}
+
+/* Estilo para la tarjeta de producto */
 .allproducts-product__card {
     width: 215px; /* Ancho fijo para que todos los contenedores tengan el mismo tamaño */
     height: 300px; /* Reducir la altura para mayor compacidad */
@@ -126,7 +172,6 @@
     font-size: 1.1em; /* Aumentar el tamaño del precio para destacar */
     font-weight: bold; /* Hacer el precio en negrita */
     color: #000000; /* Mantener el color azul */
-    background-color: #f0f8ff; /* Fondo claro para resaltar el precio */
     padding: 5px; /* Añadir un poco de padding alrededor del precio */
     border-radius: 5px; /* Bordes redondeados para suavizar */
 }
