@@ -53,8 +53,6 @@ const AllProducts = () => {
         return producto.precio >= minPrice && producto.precio <= maxPrice;
     });
 
-    const categoriaTitulo = categoriaSeleccionada || 'Todos los Productos';
-
     return (
         <>
             <Header />
@@ -130,7 +128,7 @@ const AllProducts = () => {
                         <button 
                             className="allproducts-price__apply-button" 
                             onClick={() => {
-                                setPrecioSeleccionado(''); // Desactivar otros filtros
+                                setPrecioSeleccionado('');
                             }}>
                             Aplicar Filtros
                         </button>
@@ -138,8 +136,6 @@ const AllProducts = () => {
                 </div>
 
                 <div className="allproducts-products__container">
-                    <h2 className="allproducts-products__title">{categoriaTitulo}</h2>
-
                     <div className='allproducts-products'>
                         {isLoading ? (
                             <p>Cargando productos...</p>

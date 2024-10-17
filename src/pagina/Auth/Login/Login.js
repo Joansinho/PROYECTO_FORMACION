@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../../context/AuthContext/AuthContext'; // Asegúrate de la ruta correcta
-import { useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { useAuth } from '../../../context/AuthContext/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'; // Importa los iconos
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 const Login = () => {
     const [isRegisterView, setIsRegisterView] = useState(false);
@@ -10,10 +10,10 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [passwordVisible, setPasswordVisible] = useState(false); // Estado para mostrar/ocultar la contraseña
-    const { login, register } = useAuth(); // Usa el contexto de autenticación
-    const navigate = useNavigate(); // Hook de navegación
-    const [errorMessage, setErrorMessage] = useState(''); // Manejo de errores
+    const [passwordVisible, setPasswordVisible] = useState(false);
+    const { login, register } = useAuth();
+    const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = useState('');
 
     const toggleToRegister = () => {
         setIsRegisterView(true);
@@ -25,7 +25,7 @@ const Login = () => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setErrorMessage(''); // Resetear el mensaje de error
+        setErrorMessage('');
         if (!validateEmail(email)) {
             setErrorMessage('Por favor, ingresa un correo electrónico válido.');
             return;
@@ -37,7 +37,7 @@ const Login = () => {
 
         try {
             await login({ email, password });
-            navigate('/'); // Redirige a Home después del login
+            navigate('/');
         } catch (error) {
             console.error('Login failed:', error);
             setErrorMessage('Error al iniciar sesión. Verifica tus credenciales.');
@@ -46,8 +46,7 @@ const Login = () => {
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        setErrorMessage(''); // Resetear el mensaje de error
-
+        setErrorMessage('');
         if (!validateName(name) || !validateName(lastName)) {
             setErrorMessage('El nombre y apellido solo pueden contener letras.');
             return;
@@ -63,7 +62,7 @@ const Login = () => {
 
         try {
             await register({ nombre: name, apellido: lastName, correo: email, password });
-            navigate('/'); // Redirige a Home después del registro exitoso
+            navigate('/');
         } catch (error) {
             console.error('Registration failed:', error);
             setErrorMessage('Error al registrarse. Intenta nuevamente.');
@@ -74,16 +73,13 @@ const Login = () => {
         setPasswordVisible(!passwordVisible);
     };
 
-    // Validación para el formato del correo electrónico
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return emailRegex.test(email);
     };
 
-    // Validación para nombre y apellido (solo letras y espacios)
     const validateName = (value) => /^[a-zA-Z\s]+$/.test(value);
 
-    // Validación de contraseña (mínimo 8 caracteres, con letras, números y al menos un símbolo)
     const validatePassword = (value) => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         return passwordRegex.test(value);
@@ -113,6 +109,7 @@ const Login = () => {
                             placeholder="Correo Electrónico"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            maxLength={30} // Limitar a 50 caracteres
                             required
                         />
                         <div className="password-container">
@@ -121,6 +118,7 @@ const Login = () => {
                                 placeholder="Contraseña"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                maxLength={20} // Limitar a 20 caracteres
                                 required
                             />
                             <span className="password-icon" onClick={handlePasswordVisibility}>
@@ -137,14 +135,16 @@ const Login = () => {
                             type="text"
                             placeholder="Nombre"
                             value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={(e) => setName(e.target.value.replace(/[^a-zA-Z\s]/g, ''))} // Quita números
+                            maxLength={20} // Limitar a 30 caracteres
                             required
                         />
                         <input
                             type="text"
                             placeholder="Apellido"
                             value={lastName}
-                            onChange={(e) => setLastName(e.target.value)}
+                            onChange={(e) => setLastName(e.target.value.replace(/[^a-zA-Z\s]/g, ''))} // Quita números
+                            maxLength={20} // Limitar a 30 caracteres
                             required
                         />
                         <input
@@ -152,6 +152,7 @@ const Login = () => {
                             placeholder="Correo"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            maxLength={30} // Limitar a 50 caracteres
                             required
                         />
                         <div className="password-container">
@@ -160,6 +161,7 @@ const Login = () => {
                                 placeholder="Contraseña"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                maxLength={20} // Limitar a 20 caracteres
                                 required
                             />
                             <span className="password-icon" onClick={handlePasswordVisibility}>
